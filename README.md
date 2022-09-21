@@ -1,2 +1,2 @@
 # ST558_Project_2
-Group project with Yi Ren
+Group project - Yi Ren & Paula Bailey
