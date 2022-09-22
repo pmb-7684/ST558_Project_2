@@ -1,0 +1,1 @@
+rmarkdown::render("Demo.Rmd", "github_document",output_file = "README.md")
