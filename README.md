@@ -1,39 +1,39 @@
-Demo
+ST 558 - Project 2
 ================
-Paula Bailey
+Paula Bailey and Yi Ren
 2022-09-22
 
-``` r
-rmarkdown::render("Demo.Rmd", "github_document",output_file = "README.md")
-```
+Pokémon inhabit the world of the Pokémon games. The franchise was
+created by Satoshi Tajiri in 1996. These fictional creatures can be
+caught using Pokéballs and trained by battling with other Pokémon. There
+are current 920 species according to Wikipedia.
 
-## R Markdown
+This vignette will walk the reader through the process of connecting to
+& collecting data from PokeAPI <https://pokeapi.co/> within R
+programming environment.
 
-This is an R Markdown document. Markdown is a simple formatting syntax
-for authoring HTML, PDF, and MS Word documents. For more details on
-using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that
-includes both content as well as the output of any embedded R code
-chunks within the document. You can embed an R code chunk like this:
+## Reference to Render Code
 
 ``` r
-summary(cars)
+rmarkdown::render("Project2.Rmd", "github_document","README.md")
 ```
 
-    ##      speed           dist       
-    ##  Min.   : 4.0   Min.   :  2.00  
-    ##  1st Qu.:12.0   1st Qu.: 26.00  
-    ##  Median :15.0   Median : 36.00  
-    ##  Mean   :15.4   Mean   : 42.98  
-    ##  3rd Qu.:19.0   3rd Qu.: 56.00  
-    ##  Max.   :25.0   Max.   :120.00
+## Packages for Vignette
 
-## Including Plots
+The following packages are required for connecting and retrieving data
+from the API.
 
-You can also embed plots, for example:
+1.  `httr` - *Retrieves Data from an API*
+2.  `jsonlite` - *Parses Results from an API Query*
+3.  `dplyr` - *A part of the `tidyverse` used for manipulating data*
+4.  `tidyr` - *A part of the `tidyverse` used for data cleaning and
+    ‘tidying’*
+5.  `ggplot2` - *A part of the `tidyverse` used for creating graphics*
 
-![](README_files/figure-gfm/pressure-1.png)<!-- -->
-
-Note that the `echo = FALSE` parameter was added to the code chunk to
-prevent printing of the R code that generated the plot.
+``` r
+# Read in Required Packages 
+library(httr)
+library(jsonlite)
+library(tidyverse)
+library(ggplot2)
+```
