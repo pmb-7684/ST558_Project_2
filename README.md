@@ -136,7 +136,7 @@ api_json<-fromJSON(api_text,flatten=TRUE)
 ```
 
 ``` r
-get_berries_df <- as.data.frame(api_json)
+berries_df <- as.data.frame(api_json)
 ```
 
 Gets data for the remaining berries and combines into first berry df.
@@ -151,18 +151,35 @@ for(i in 2:64){
   api_text2<-content(res2,"text")
   api_json2<-fromJSON(api_text2,flatten=TRUE)
   
-  get_next_df <- as.data.frame(api_json2)
+  next_df <- as.data.frame(api_json2)
   
-  get_berries_df <- rbind(get_berries_df,get_next_df)
+  berries_df <- rbind(berries_df,next_df)
   
 
 }
 ```
 
+Descriptions from `pokeapi.co` website: name: name of berry.
+
+growth_time:  
+Time it takes the tree to grow one stage, in hours. Berry trees go
+through four of these growth stages before they can be picked.
+
+size: The size of this Berry, in millimeters.
+
+soil_dryness: The speed at which this Berry dries out the soil as it
+grows. A higher rate means the soil dries more quickly.
+
+firmness: The firmness of this berry, used in making Pokéblocks or
+Poffins.
+
+flavors: A list of references to each flavor a berry can have and the
+potency of each of those flavors in regard to this berry.
+
 summarize
 
 ``` r
-table(get_berries_df$flavors.flavor.name, get_berries_df$growth_time)
+table(berries_df$flavors.flavor.name, berries_df$growth_time)
 ```
 
     ##         
@@ -174,7 +191,7 @@ table(get_berries_df$flavors.flavor.name, get_berries_df$growth_time)
     ##   sweet   5  5  3  5  4  7  1  5 17 12
 
 ``` r
-table(get_berries_df$flavors.flavor.name, get_berries_df$flavors.potency)
+table(berries_df$flavors.flavor.name, berries_df$flavors.potency)
 ```
 
     ##         
@@ -185,8 +202,72 @@ table(get_berries_df$flavors.flavor.name, get_berries_df$flavors.potency)
     ##   spicy  35 17  3  2  1  5  1
     ##   sweet  35 18  3  2  0  5  1
 
+Numerical Summary - Growth Time
+
 ``` r
-g<-ggplot(get_berries_df,aes(x = firmness.name))
+summary(berries_df$growth_time)
+```
+
+    ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+    ##    2.00    5.00   15.00   12.86   18.00   24.00
+
+Numerical Summary - Soil Dryness
+
+``` r
+summary(berries_df$soil_dryness)
+```
+
+    ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+    ##     4.0     6.0     8.0    10.2    10.0    35.0
+
+Correlation
+
+``` r
+cor(berries_df$growth_time,berries_df$soil_dryness)
+```
+
+    ## [1] -0.6768502
+
+``` r
+cor(berries_df$growth_time, berries_df$size)
+```
+
+    ## [1] 0.1178562
+
+``` r
+berries_df %>% group_by(berries_df$flavors.flavor.name)%>%
+  summarise(avg = mean(berries_df$growth_time), med = median(berries_df$growth_time), var = var(berries_df$growth_time))
+```
+
+    ## # A tibble: 5 x 4
+    ##   `berries_df$flavors.flavor.name`   avg   med   var
+    ##   <chr>                            <dbl> <dbl> <dbl>
+    ## 1 bitter                            12.9    15  61.7
+    ## 2 dry                               12.9    15  61.7
+    ## 3 sour                              12.9    15  61.7
+    ## 4 spicy                             12.9    15  61.7
+    ## 5 sweet                             12.9    15  61.7
+
+``` r
+berries_df %>% group_by(berries_df$soil_drynes)%>%
+  summarise(avg = mean(berries_df$growth_time), med = median(berries_df$growth_time), var = var(berries_df$growth_time))
+```
+
+    ## # A tibble: 7 x 4
+    ##   `berries_df$soil_drynes`   avg   med   var
+    ##                      <int> <dbl> <dbl> <dbl>
+    ## 1                        4  12.9    15  61.7
+    ## 2                        6  12.9    15  61.7
+    ## 3                        7  12.9    15  61.7
+    ## 4                        8  12.9    15  61.7
+    ## 5                       10  12.9    15  61.7
+    ## 6                       15  12.9    15  61.7
+    ## 7                       35  12.9    15  61.7
+
+Categorical chart
+
+``` r
+g<-ggplot(berries_df,aes(x = firmness.name))
       g + 
         geom_bar(aes(fill = size),
                    position = "dodge") + 
@@ -194,31 +275,42 @@ g<-ggplot(get_berries_df,aes(x = firmness.name))
         scale_fill_discrete(name = "Size Category") 
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-52-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-48-1.png)<!-- -->
 
 ``` r
-    g<-ggplot(get_berries_df,
+    g<-ggplot(berries_df,
               aes(x = soil_dryness))
       g + geom_histogram(bins = 15) + 
         labs(x = "Soil",title = "Dryness of the Soil") 
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-53-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-49-1.png)<!-- -->
 
 ``` r
-    g<-ggplot(get_berries_df,
+    g<-ggplot(berries_df,
               aes(x = growth_time))
       g + geom_histogram(bins = 15) + 
         labs(x = "Growth Time",title = "Berry Growth Time") 
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-54-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-50-1.png)<!-- -->
 
 ``` r
-    g<-ggplot(get_berries_df,
+    g<-ggplot(berries_df,
               aes(x = growth_time, y = soil_dryness))
       g + geom_point() + 
         labs(x = "Growth Time",title = "Berry Growth Time") 
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-55-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-51-1.png)<!-- -->
+
+``` r
+    g<-ggplot(berries_df,
+              aes(x = growth_time, y = soil_dryness ))
+      g + geom_boxplot() + 
+        labs(x = "Growth Time",title = "Berry Growth Time") 
+```
+
+    ## Warning: Continuous x aesthetic -- did you forget aes(group=...)?
+
+![](README_files/figure-gfm/unnamed-chunk-52-1.png)<!-- -->
