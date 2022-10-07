@@ -53,15 +53,12 @@ encounter_json<-fromJSON(encounter_text,flatten=TRUE)
 encounter_json$location_area.name
 ```
 
-    ##  [1] "sinnoh-route-218-area"          "johto-route-34-area"           
-    ##  [3] "johto-route-35-area"            "johto-route-47-area"           
-    ##  [5] "kanto-route-13-area"            "kanto-route-14-area"           
-    ##  [7] "kanto-route-15-area"            "cerulean-cave-1f"              
-    ##  [9] "cerulean-cave-2f"               "cerulean-cave-b1f"             
-    ## [11] "kanto-route-23-area"            "pokemon-mansion-b1f"           
-    ## [13] "desert-underpass-area"          "giant-chasm-forest"            
-    ## [15] "giant-chasm-forest-cave"        "pokemon-village-area"          
-    ## [17] "johto-safari-zone-zone-wetland"
+    ##  [1] "sinnoh-route-218-area"          "johto-route-34-area"            "johto-route-35-area"           
+    ##  [4] "johto-route-47-area"            "kanto-route-13-area"            "kanto-route-14-area"           
+    ##  [7] "kanto-route-15-area"            "cerulean-cave-1f"               "cerulean-cave-2f"              
+    ## [10] "cerulean-cave-b1f"              "kanto-route-23-area"            "pokemon-mansion-b1f"           
+    ## [13] "desert-underpass-area"          "giant-chasm-forest"             "giant-chasm-forest-cave"       
+    ## [16] "pokemon-village-area"           "johto-safari-zone-zone-wetland"
 
 using above to create function: get_encounter \<- function()
 
@@ -275,7 +272,7 @@ g<-ggplot(berries_df,aes(x = firmness.name))
         scale_fill_discrete(name = "Size Category") 
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-48-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-97-1.png)<!-- -->
 
 ``` r
     g<-ggplot(berries_df,
@@ -284,7 +281,7 @@ g<-ggplot(berries_df,aes(x = firmness.name))
         labs(x = "Soil",title = "Dryness of the Soil") 
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-49-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-98-1.png)<!-- -->
 
 ``` r
     g<-ggplot(berries_df,
@@ -293,7 +290,7 @@ g<-ggplot(berries_df,aes(x = firmness.name))
         labs(x = "Growth Time",title = "Berry Growth Time") 
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-50-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-99-1.png)<!-- -->
 
 ``` r
     g<-ggplot(berries_df,
@@ -302,7 +299,7 @@ g<-ggplot(berries_df,aes(x = firmness.name))
         labs(x = "Growth Time",title = "Berry Growth Time") 
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-51-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-100-1.png)<!-- -->
 
 ``` r
     g<-ggplot(berries_df,
@@ -313,4 +310,4 @@ g<-ggplot(berries_df,aes(x = firmness.name))
 
     ## Warning: Continuous x aesthetic -- did you forget aes(group=...)?
 
-![](README_files/figure-gfm/unnamed-chunk-52-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-101-1.png)<!-- -->
