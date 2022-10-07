@@ -272,7 +272,7 @@ g<-ggplot(berries_df,aes(x = firmness.name))
         scale_fill_discrete(name = "Size Category") 
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-97-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-239-1.png)<!-- -->
 
 ``` r
     g<-ggplot(berries_df,
@@ -281,7 +281,7 @@ g<-ggplot(berries_df,aes(x = firmness.name))
         labs(x = "Soil",title = "Dryness of the Soil") 
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-98-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-240-1.png)<!-- -->
 
 ``` r
     g<-ggplot(berries_df,
@@ -290,7 +290,7 @@ g<-ggplot(berries_df,aes(x = firmness.name))
         labs(x = "Growth Time",title = "Berry Growth Time") 
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-99-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-241-1.png)<!-- -->
 
 ``` r
     g<-ggplot(berries_df,
@@ -299,7 +299,7 @@ g<-ggplot(berries_df,aes(x = firmness.name))
         labs(x = "Growth Time",title = "Berry Growth Time") 
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-100-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-242-1.png)<!-- -->
 
 ``` r
     g<-ggplot(berries_df,
@@ -310,4 +310,4 @@ g<-ggplot(berries_df,aes(x = firmness.name))
 
     ## Warning: Continuous x aesthetic -- did you forget aes(group=...)?
 
-![](README_files/figure-gfm/unnamed-chunk-101-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-243-1.png)<!-- -->
