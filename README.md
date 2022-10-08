@@ -51,14 +51,13 @@ encounter_json<-fromJSON(encounter_text,flatten=TRUE)
 ``` r
 #where you can encounter this pokeman
 encounter_json$location_area.name
+#>  [1] "sinnoh-route-218-area"          "johto-route-34-area"            "johto-route-35-area"           
+#>  [4] "johto-route-47-area"            "kanto-route-13-area"            "kanto-route-14-area"           
+#>  [7] "kanto-route-15-area"            "cerulean-cave-1f"               "cerulean-cave-2f"              
+#> [10] "cerulean-cave-b1f"              "kanto-route-23-area"            "pokemon-mansion-b1f"           
+#> [13] "desert-underpass-area"          "giant-chasm-forest"             "giant-chasm-forest-cave"       
+#> [16] "pokemon-village-area"           "johto-safari-zone-zone-wetland"
 ```
-
-    ##  [1] "sinnoh-route-218-area"          "johto-route-34-area"            "johto-route-35-area"           
-    ##  [4] "johto-route-47-area"            "kanto-route-13-area"            "kanto-route-14-area"           
-    ##  [7] "kanto-route-15-area"            "cerulean-cave-1f"               "cerulean-cave-2f"              
-    ## [10] "cerulean-cave-b1f"              "kanto-route-23-area"            "pokemon-mansion-b1f"           
-    ## [13] "desert-underpass-area"          "giant-chasm-forest"             "giant-chasm-forest-cave"       
-    ## [16] "pokemon-village-area"           "johto-safari-zone-zone-wetland"
 
 using above to create function: get_encounter \<- function()
 
@@ -80,41 +79,21 @@ df_types<-fromJSON(types_text,flatten=TRUE)
 #obtain moves and damage info about Pokémon
 #df_types[["moves"]]['name']
 df_types[["move_damage_class"]]['name']
-```
-
-    ## $name
-    ## [1] "physical"
-
-``` r
+#> $name
+#> [1] "physical"
 df_types[["damage_relations"]][["double_damage_from"]]['name']
-```
-
-    ##       name
-    ## 1 fighting
-
-``` r
+#>       name
+#> 1 fighting
 df_types[["damage_relations"]][["half_damage_to"]]['name']
-```
-
-    ##    name
-    ## 1  rock
-    ## 2 steel
-
-``` r
+#>    name
+#> 1  rock
+#> 2 steel
 df_types[["damage_relations"]][["no_damage_from"]]['name']
-```
-
-    ##    name
-    ## 1 ghost
-
-``` r
+#>    name
+#> 1 ghost
 df_types[["damage_relations"]][["no_damage_to"]]['name']
-```
-
-    ##    name
-    ## 1 ghost
-
-``` r
+#>    name
+#> 1 ghost
 #df_types[["move_damage_class"]]
 ```
 
@@ -177,89 +156,81 @@ summarize
 
 ``` r
 table(berries_df$flavors.flavor.name, berries_df$growth_time)
+#>         
+#>           2  3  4  5  6  8 12 15 18 24
+#>   bitter  5  5  3  5  4  7  1  5 17 12
+#>   dry     5  5  3  5  4  7  1  5 17 12
+#>   sour    5  5  3  5  4  7  1  5 17 12
+#>   spicy   5  5  3  5  4  7  1  5 17 12
+#>   sweet   5  5  3  5  4  7  1  5 17 12
 ```
-
-    ##         
-    ##           2  3  4  5  6  8 12 15 18 24
-    ##   bitter  5  5  3  5  4  7  1  5 17 12
-    ##   dry     5  5  3  5  4  7  1  5 17 12
-    ##   sour    5  5  3  5  4  7  1  5 17 12
-    ##   spicy   5  5  3  5  4  7  1  5 17 12
-    ##   sweet   5  5  3  5  4  7  1  5 17 12
 
 ``` r
 table(berries_df$flavors.flavor.name, berries_df$flavors.potency)
+#>         
+#>           0 10 15 20 25 30 40
+#>   bitter 36 19  3  2  0  3  1
+#>   dry    34 20  3  2  1  3  1
+#>   sour   36 17  3  2  0  5  1
+#>   spicy  35 17  3  2  1  5  1
+#>   sweet  35 18  3  2  0  5  1
 ```
-
-    ##         
-    ##           0 10 15 20 25 30 40
-    ##   bitter 36 19  3  2  0  3  1
-    ##   dry    34 20  3  2  1  3  1
-    ##   sour   36 17  3  2  0  5  1
-    ##   spicy  35 17  3  2  1  5  1
-    ##   sweet  35 18  3  2  0  5  1
 
 Numerical Summary - Growth Time
 
 ``` r
 summary(berries_df$growth_time)
+#>    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+#>    2.00    5.00   15.00   12.86   18.00   24.00
 ```
-
-    ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-    ##    2.00    5.00   15.00   12.86   18.00   24.00
 
 Numerical Summary - Soil Dryness
 
 ``` r
 summary(berries_df$soil_dryness)
+#>    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+#>     4.0     6.0     8.0    10.2    10.0    35.0
 ```
-
-    ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-    ##     4.0     6.0     8.0    10.2    10.0    35.0
 
 Correlation
 
 ``` r
 cor(berries_df$growth_time,berries_df$soil_dryness)
+#> [1] -0.6768502
 ```
-
-    ## [1] -0.6768502
 
 ``` r
 cor(berries_df$growth_time, berries_df$size)
+#> [1] 0.1178562
 ```
-
-    ## [1] 0.1178562
 
 ``` r
 berries_df %>% group_by(berries_df$flavors.flavor.name)%>%
   summarise(avg = mean(berries_df$growth_time), med = median(berries_df$growth_time), var = var(berries_df$growth_time))
+#> # A tibble: 5 x 4
+#>   `berries_df$flavors.flavor.name`   avg   med   var
+#>   <chr>                            <dbl> <dbl> <dbl>
+#> 1 bitter                            12.9    15  61.7
+#> 2 dry                               12.9    15  61.7
+#> 3 sour                              12.9    15  61.7
+#> 4 spicy                             12.9    15  61.7
+#> 5 sweet                             12.9    15  61.7
 ```
-
-    ## # A tibble: 5 x 4
-    ##   `berries_df$flavors.flavor.name`   avg   med   var
-    ##   <chr>                            <dbl> <dbl> <dbl>
-    ## 1 bitter                            12.9    15  61.7
-    ## 2 dry                               12.9    15  61.7
-    ## 3 sour                              12.9    15  61.7
-    ## 4 spicy                             12.9    15  61.7
-    ## 5 sweet                             12.9    15  61.7
 
 ``` r
 berries_df %>% group_by(berries_df$soil_drynes)%>%
   summarise(avg = mean(berries_df$growth_time), med = median(berries_df$growth_time), var = var(berries_df$growth_time))
+#> # A tibble: 7 x 4
+#>   `berries_df$soil_drynes`   avg   med   var
+#>                      <int> <dbl> <dbl> <dbl>
+#> 1                        4  12.9    15  61.7
+#> 2                        6  12.9    15  61.7
+#> 3                        7  12.9    15  61.7
+#> 4                        8  12.9    15  61.7
+#> 5                       10  12.9    15  61.7
+#> 6                       15  12.9    15  61.7
+#> 7                       35  12.9    15  61.7
 ```
-
-    ## # A tibble: 7 x 4
-    ##   `berries_df$soil_drynes`   avg   med   var
-    ##                      <int> <dbl> <dbl> <dbl>
-    ## 1                        4  12.9    15  61.7
-    ## 2                        6  12.9    15  61.7
-    ## 3                        7  12.9    15  61.7
-    ## 4                        8  12.9    15  61.7
-    ## 5                       10  12.9    15  61.7
-    ## 6                       15  12.9    15  61.7
-    ## 7                       35  12.9    15  61.7
 
 Categorical chart
 
@@ -272,7 +243,7 @@ g<-ggplot(berries_df,aes(x = firmness.name))
         scale_fill_discrete(name = "Size Category") 
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-239-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-101-1.png)<!-- -->
 
 ``` r
     g<-ggplot(berries_df,
@@ -281,7 +252,7 @@ g<-ggplot(berries_df,aes(x = firmness.name))
         labs(x = "Soil",title = "Dryness of the Soil") 
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-240-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-102-1.png)<!-- -->
 
 ``` r
     g<-ggplot(berries_df,
@@ -290,7 +261,7 @@ g<-ggplot(berries_df,aes(x = firmness.name))
         labs(x = "Growth Time",title = "Berry Growth Time") 
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-241-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-103-1.png)<!-- -->
 
 ``` r
     g<-ggplot(berries_df,
@@ -299,15 +270,14 @@ g<-ggplot(berries_df,aes(x = firmness.name))
         labs(x = "Growth Time",title = "Berry Growth Time") 
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-242-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-104-1.png)<!-- -->
 
 ``` r
     g<-ggplot(berries_df,
               aes(x = growth_time, y = soil_dryness ))
       g + geom_boxplot() + 
         labs(x = "Growth Time",title = "Berry Growth Time") 
+#> Warning: Continuous x aesthetic -- did you forget aes(group=...)?
 ```
 
-    ## Warning: Continuous x aesthetic -- did you forget aes(group=...)?
-
-![](README_files/figure-gfm/unnamed-chunk-243-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-105-1.png)<!-- -->
