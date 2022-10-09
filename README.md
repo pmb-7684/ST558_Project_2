@@ -38,33 +38,6 @@ library(tidyverse)
 library(ggplot2)
 ```
 
-The pokemon api allow the user to pull information via the pokemon’s
-name or ID number.
-
-Descriptions Moves:
-
-id The identifier for this resource. * name The name for this
-resource. * accuracy The percent value of how likely this move is to be
-successful. * effect_chance The percent value of how likely it is this
-moves effect will happen* pp Power points. The number of times this move
-can be used. contest_combos A detail of normal and super contest combos
-that require this move. contest_effect The effect the move has when used
-in a contest. damage_class The type of damage the move inflicts on the
-target, e.g. physical. learned_by_pokemon List of Pokemon that can learn
-the move stat_changes A list of stats this moves effects and how much it
-effects them. target The type of target that will receive the effects of
-the attack.
-
-``` r
-# Create a function for pokemon moves
-lookup_moves<-function(infoMove, value){
-  base<-"https://pokeapi.co/api/v2/"
-  url<-(paste0(base,infoMove,"/",value,"/"))
-  pokemon_api<-GET(url) %>% content("text") %>% fromJSON(flatten=TRUE)
-  return(pokemon_api)
-}
-```
-
 ——TYPE \## Function for obtaining obtaining type The type (number) is
 necessary to find any moe information
 
@@ -159,98 +132,6 @@ for(i in 2:64){
   
 
 }
-```
-
-Descriptions from `pokeapi.co` website: name: name of berry.
-
-growth_time:  
-Time it takes the tree to grow one stage, in hours. Berry trees go
-through four of these growth stages before they can be picked.
-
-size: The size of this Berry, in millimeters.
-
-soil_dryness: The speed at which this Berry dries out the soil as it
-grows. A higher rate means the soil dries more quickly.
-
-firmness: The firmness of this berry, used in making Pokéblocks or
-Poffins.
-
-flavors: A list of references to each flavor a berry can have and the
-potency of each of those flavors in regard to this berry.
-
-——ENCOUNTERS—– ORGINAL
-
-Gets data for the encounter condition value and puts it into a df
-
-``` r
-res = GET("https://pokeapi.co/api/v2/encounter-condition-value/1") 
-api_text<-content(res,"text")
-api_json<-fromJSON(api_text,flatten=TRUE)
-```
-
-``` r
-encounter_values_df <- as.data.frame(api_json)
-```
-
-``` r
-for(i in 2:31){
-  #increment through each encounter method until we get all 31 methods
-  base <- "https://pokeapi.co/api/v2/encounter-condition-value/"
-  call_next <- (paste0(base,i,"/"))
-  
-  res2 = GET(call_next) 
-  api_text2<-content(res2,"text")
-  api_json2<-fromJSON(api_text2,flatten=TRUE)
-  
-  next_df <- as.data.frame(api_json2)
-  
-  encounter_values_df <- rbind(encounter_values_df,next_df)
-  
-}
-```
-
-------------------------------------------------------------------------
-
-Gets data for the encounter methods and puts it into a df
-
-``` r
-res = GET("https://pokeapi.co/api/v2/encounter-method/1") 
-api_text<-content(res,"text")
-api_json<-fromJSON(api_text,flatten=TRUE)
-```
-
-``` r
-encounter_method_df <- as.data.frame(api_json)
-```
-
-Gets data for the remaining encounter methods and combines into df.
-`Need to work on a method to loop through api without for loop and hard coding the end point.`
-
-``` r
-for(i in 2:31){
-  #increment through each encounter method until we get all 31 methods
-  base <- "https://pokeapi.co/api/v2/encounter-method/"
-  call_next <- (paste0(base,i,"/"))
-  
-  res2 = GET(call_next) 
-  api_text2<-content(res2,"text")
-  api_json2<-fromJSON(api_text2,flatten=TRUE)
-  
-  next_df <- as.data.frame(api_json2)
-  
-  encounter_method_df <- rbind(encounter_method_df,next_df)
-  
-}
-```
-
-NEXT STEP - LOOKS LIKE WE CAN JOIN ENCOUNTERS BY ID AND THEN LANGUAGE
-ALSO REVISIT ENCOUNTER CONDITIONS….REC’D AN ERROR
-
-``` r
-combineEncounter <- inner_join(encounter_method_df, 
-           encounter_values_df, 
-           by = c("id" = "id")) %>% filter(names.language.name.x == "en" & names.language.name.y == "en")
-           
 ```
 
 summarize
@@ -374,7 +255,7 @@ g<-ggplot(berries_df,aes(x = firmness.name))
         scale_fill_discrete(name = "Size Category") 
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-139-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-45-1.png)<!-- -->
 
 ``` r
     g<-ggplot(berries_df,
@@ -383,7 +264,7 @@ g<-ggplot(berries_df,aes(x = firmness.name))
         labs(x = "Soil",title = "Dryness of the Soil") 
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-140-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-46-1.png)<!-- -->
 
 ``` r
     g<-ggplot(berries_df,
@@ -392,7 +273,7 @@ g<-ggplot(berries_df,aes(x = firmness.name))
         labs(x = "Growth Time",title = "Berry Growth Time") 
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-141-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-47-1.png)<!-- -->
 
 ``` r
     g<-ggplot(berries_df,
@@ -402,4 +283,4 @@ g<-ggplot(berries_df,aes(x = firmness.name))
           labs(x = "Growth Time",title = "Berry Growth Time") 
 ```
 
-<img src="README_files/figure-gfm/unnamed-chunk-142-1.png" width="60%" style="display: block; margin: auto;" />
+<img src="README_files/figure-gfm/unnamed-chunk-48-1.png" width="60%" style="display: block; margin: auto;" />
