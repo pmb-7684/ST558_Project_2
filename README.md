@@ -192,34 +192,6 @@ cor(berries_df$id, berries_df$natural_gift_power)
 ```
 
 ``` r
-berries_df %>% group_by(berries_df$flavors.flavor.name)%>%
-  summarise(avg = mean(berries_df$growth_time), med = median(berries_df$growth_time), var = var(berries_df$growth_time))
-#> # A tibble: 5 x 4
-#>   `berries_df$flavors.flavor.name`   avg   med   var
-#>   <chr>                            <dbl> <dbl> <dbl>
-#> 1 bitter                            12.9    15  61.7
-#> 2 dry                               12.9    15  61.7
-#> 3 sour                              12.9    15  61.7
-#> 4 spicy                             12.9    15  61.7
-#> 5 sweet                             12.9    15  61.7
-```
-
-``` r
-berries_df %>% group_by(berries_df$soil_drynes)%>%
-  summarise(avg = mean(berries_df$growth_time), med = median(berries_df$growth_time), var = var(berries_df$growth_time))
-#> # A tibble: 7 x 4
-#>   `berries_df$soil_drynes`   avg   med   var
-#>                      <int> <dbl> <dbl> <dbl>
-#> 1                        4  12.9    15  61.7
-#> 2                        6  12.9    15  61.7
-#> 3                        7  12.9    15  61.7
-#> 4                        8  12.9    15  61.7
-#> 5                       10  12.9    15  61.7
-#> 6                       15  12.9    15  61.7
-#> 7                       35  12.9    15  61.7
-```
-
-``` r
 berrySummary <- berries_df %>% select(flavors.potency, growth_time, max_harvest, natural_gift_power, size, smoothness, soil_dryness) %>% apply(2, function(x){summary(x[!is.na(x)])}) 
 knitr::kable(berrySummary, caption = 'Summary of Berry Stats', digits = 2)
 ```
@@ -237,34 +209,38 @@ Summary of Berry Stats
 
 Categorical chart
 
-``` r
-g<-ggplot(berries_df,aes(x = firmness.name))
-      g + 
-        geom_bar(aes(fill = size),
-                   position = "dodge") + 
-        labs(x = "Firmness of Berry Fruit", y = "Count", title = "Firmness By Category") + 
-        scale_fill_discrete(name = "Size Category") 
-```
+# Bar Plot
 
-![](README_files/figure-gfm/unnamed-chunk-59-1.png)<!-- -->
+This bar plot show the categories of flavor for berry which are grouped
+by their firmness. The soft berries comprise a larger number of the
+berries. It does not matter what the flavor of the berry is.
 
 ``` r
-    g<-ggplot(berries_df,
-              aes(x = soil_dryness))
-      g + geom_histogram(bins = 15) + 
-        labs(x = "Soil",title = "Dryness of the Soil") 
+ggplot(berries_df,aes(y = flavors.flavor.name, fill = firmness.name)) + geom_bar(position="dodge") + labs(y="Flavor of Berry") + scale_fill_discrete(name="Firmness") + theme(legend.title = element_text(size = 5), legend.text = element_text(size = 5))
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-60-1.png)<!-- -->
+<img src="README_files/figure-gfm/bar-1.png" width="60%" style="display: block; margin: auto;" />
+
+# Histogram
+
+This histogram shows the distribution of growing time for berries. This
+histogram show a bimodal distribution.
 
 ``` r
     g<-ggplot(berries_df,
               aes(x = growth_time))
-      g + geom_histogram(bins = 15) + 
-        labs(x = "Growth Time",title = "Berry Growth Time") 
+    g + geom_histogram(bins = 5) + 
+        labs(x = "Growth Time",title = "Histogram of Berry Growth Time")  + 
+        theme(legend.title =    element_text(size = 5), legend.text = element_text(size = 5))
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-61-1.png)<!-- -->
+<img src="README_files/figure-gfm/histogram berries-1.png" width="60%" style="display: block; margin: auto;" />
+
+# Scatter plot
+
+The scatter plot visually verifies the negative relationship between the
+growth of berries and soil dryness. As the berry grows, the soil becomes
+drier.
 
 ``` r
     g<-ggplot(berries_df,
@@ -274,4 +250,4 @@ g<-ggplot(berries_df,aes(x = firmness.name))
           labs(x = "Growth Time",title = "Berry Growth Time") 
 ```
 
-<img src="README_files/figure-gfm/unnamed-chunk-62-1.png" width="60%" style="display: block; margin: auto;" />
+<img src="README_files/figure-gfm/unnamed-chunk-58-1.png" width="60%" style="display: block; margin: auto;" />

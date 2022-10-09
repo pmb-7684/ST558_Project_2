@@ -169,17 +169,7 @@ received from the berry
 cor(berries_df$id, berries_df$natural_gift_power)
 ```
 
-```{r}
-berries_df %>% group_by(berries_df$flavors.flavor.name)%>%
-  summarise(avg = mean(berries_df$growth_time), med = median(berries_df$growth_time), var = var(berries_df$growth_time))
-```
 
-
-
-```{r}
-berries_df %>% group_by(berries_df$soil_drynes)%>%
-  summarise(avg = mean(berries_df$growth_time), med = median(berries_df$growth_time), var = var(berries_df$growth_time))
-```
 
 
 
@@ -191,34 +181,30 @@ knitr::kable(berrySummary, caption = 'Summary of Berry Stats', digits = 2)
 
 Categorical chart
 
-```{r}
-g<-ggplot(berries_df,aes(x = firmness.name))
-	  g + 
-	    geom_bar(aes(fill = size),
-	               position = "dodge") + 
-	    labs(x = "Firmness of Berry Fruit", y = "Count", title = "Firmness By Category") + 
-	    scale_fill_discrete(name = "Size Category") 
 
-```
-
-```{r}
-	g<-ggplot(berries_df,
-	          aes(x = soil_dryness))
-	  g + geom_histogram(bins = 15) + 
-	    labs(x = "Soil",title = "Dryness of the Soil") 
-
+# Bar Plot
+This bar plot show the categories of flavor for berry which are grouped by their firmness.
+The soft berries comprise a larger number of the berries.  It does not matter what the
+flavor of the berry is.
+```{r bar, out.width = "60%", fig.align = "center"}
+ggplot(berries_df,aes(y = flavors.flavor.name, fill = firmness.name)) + geom_bar(position="dodge") + labs(y="Flavor of Berry") + scale_fill_discrete(name="Firmness") + theme(legend.title = element_text(size = 5), legend.text = element_text(size = 5))
 ```
 
 
 
-```{r}
+# Histogram
+This histogram shows the distribution of growing time for berries.  This histogram
+show a bimodal distribution.  
+```{r histogram berries, out.width = "60%", fig.align = "center"}
 	g<-ggplot(berries_df,
 	          aes(x = growth_time))
-	  g + geom_histogram(bins = 15) + 
-	    labs(x = "Growth Time",title = "Berry Growth Time") 
+	g + geom_histogram(bins = 5) + 
+	    labs(x = "Growth Time",title = "Histogram of Berry Growth Time")  + 
+	    theme(legend.title =    element_text(size = 5), legend.text = element_text(size = 5))
 ```
 
-
+# Scatter plot
+The scatter plot visually verifies the negative relationship between the growth of berries and soil dryness.  As the berry grows, the soil becomes drier.
 ```{r, out.width = "60%", fig.align = "center"}
 	g<-ggplot(berries_df,
 	          aes(x = growth_time, y = soil_dryness))
@@ -226,3 +212,4 @@ g<-ggplot(berries_df,aes(x = firmness.name))
 	      geom_point() +
 	      labs(x = "Growth Time",title = "Berry Growth Time") 
 ```	  
+
