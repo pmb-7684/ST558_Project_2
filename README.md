@@ -223,8 +223,8 @@ ggplot(berries_df,aes(y = flavors.flavor.name, fill = firmness.name)) + geom_bar
 
 # Histogram
 
-This histogram shows the distribution of growing time for berries. This
-histogram show a bimodal distribution.
+This histogram shows the distribution of growing time for berries. It
+show a bimodal distribution.
 
 ``` r
     g<-ggplot(berries_df,
@@ -250,4 +250,19 @@ drier.
           labs(x = "Growth Time",title = "Berry Growth Time") 
 ```
 
-<img src="README_files/figure-gfm/unnamed-chunk-58-1.png" width="60%" style="display: block; margin: auto;" />
+<img src="README_files/figure-gfm/unnamed-chunk-68-1.png" width="60%" style="display: block; margin: auto;" />
+
+We want to see if having a higher BMI (weight/height) results in a
+slower speed. We can see a couple of pokemons with a higher BMI which
+have a slower speed. In general, there does not appear to be
+relationship. ADD ME\*\*
+
+``` r
+    g<-ggplot(poke,
+              aes(x = round((weight/height),2), y = speed))
+      g + geom_point(aes(color = type)) +
+          labs(x = "BMI", y= "Speed",title = "Body Mass Index (BMI) and Speed") +
+         theme(legend.title = element_text(size = 5), legend.text = element_text(size = 5))
+```
+
+<img src="README_files/figure-gfm/unnamed-chunk-69-1.png" width="60%" style="display: block; margin: auto;" />
