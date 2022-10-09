@@ -56,19 +56,10 @@ get_type <- function(type = fire){
 ——MOVES
 
 ``` r
-# Create a function for pokemon moves
-lookup_moves<-function(infoMove, pokemon){
-  base<-"https://pokeapi.co/api/v2/"
-  url<-(paste0(base,infoMove,"/",pokemon,"/"))
-  pokemon_api<-GET(url) %>% content("text") %>% fromJSON(flatten=TRUE)
-  return(pokemon_api)
-}
-```
-
-``` r
 get_moves <- function(type=10){
-
-  move_api<-lookup_moves("move", type)
+  base<-"https://pokeapi.co/api/v2/move/"
+  url<-(paste0(base,type,"/"))
+  move_api<-GET(url) %>% content("text") %>% fromJSON(flatten=TRUE)
   #move_ailments_api<-lookup_moves("move-ailment", type) 
   #move_battleStyle_api<-lookup_moves("move-battle-style", type) 
   #move_categories_api<-lookup_moves("move-category", type) 
@@ -255,7 +246,7 @@ g<-ggplot(berries_df,aes(x = firmness.name))
         scale_fill_discrete(name = "Size Category") 
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-45-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-59-1.png)<!-- -->
 
 ``` r
     g<-ggplot(berries_df,
@@ -264,7 +255,7 @@ g<-ggplot(berries_df,aes(x = firmness.name))
         labs(x = "Soil",title = "Dryness of the Soil") 
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-46-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-60-1.png)<!-- -->
 
 ``` r
     g<-ggplot(berries_df,
@@ -273,7 +264,7 @@ g<-ggplot(berries_df,aes(x = firmness.name))
         labs(x = "Growth Time",title = "Berry Growth Time") 
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-47-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-61-1.png)<!-- -->
 
 ``` r
     g<-ggplot(berries_df,
@@ -283,4 +274,4 @@ g<-ggplot(berries_df,aes(x = firmness.name))
           labs(x = "Growth Time",title = "Berry Growth Time") 
 ```
 
-<img src="README_files/figure-gfm/unnamed-chunk-48-1.png" width="60%" style="display: block; margin: auto;" />
+<img src="README_files/figure-gfm/unnamed-chunk-62-1.png" width="60%" style="display: block; margin: auto;" />

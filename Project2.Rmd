@@ -55,22 +55,12 @@ get_type <- function(type = fire){
 
 ------MOVES
 
-```{r}
-# Create a function for pokemon moves
-lookup_moves<-function(infoMove, pokemon){
-  base<-"https://pokeapi.co/api/v2/"
-  url<-(paste0(base,infoMove,"/",pokemon,"/"))
-  pokemon_api<-GET(url) %>% content("text") %>% fromJSON(flatten=TRUE)
-  return(pokemon_api)
-}
-
-```
-
 
 ```{r}
 get_moves <- function(type=10){
-
-  move_api<-lookup_moves("move", type)
+  base<-"https://pokeapi.co/api/v2/move/"
+  url<-(paste0(base,type,"/"))
+  move_api<-GET(url) %>% content("text") %>% fromJSON(flatten=TRUE)
   #move_ailments_api<-lookup_moves("move-ailment", type) 
   #move_battleStyle_api<-lookup_moves("move-battle-style", type) 
   #move_categories_api<-lookup_moves("move-category", type) 
