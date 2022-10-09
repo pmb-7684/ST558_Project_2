@@ -65,127 +65,63 @@ lookup_moves<-function(infoMove, value){
 }
 ```
 
-## Function for obtaining information on moves —orginal
+——TYPE \## Function for obtaining obtaining type The type (number) is
+necessary to find any moe information
 
 ``` r
-get_moves <- function(move = "move", 
-                      move_info = 1, 
-                      ailment=1,              #max 21
-                      battlestyle=1,          #max 3
-                      category=1,             #max 13
-                      damage=1,               #max 3
-                      target=1,               #max 15
-                      learn=1){               #max11
-
-  move_api<-lookup_moves("move", move_info)
-  move_ailments_api<-lookup_moves("move-ailment", ailment) 
-  move_battleStyle_api<-lookup_moves("move-battle-style", battlestyle) 
-  move_categories_api<-lookup_moves("move-category", category) 
-  move_damageClass_api<-lookup_moves("move-damage-class",damage) 
-  move_learnMethod_api<-lookup_moves("move-learn-method", learn) 
-  move_target_api<-lookup_moves("move-target", target) 
+get_type <- function(type = fire){
+  base<-"https://pokeapi.co/api/v2/type/"
+  url<-(paste0(base,type,"/"))
+  type_api<-GET(url) %>% content("text") %>% fromJSON(flatten=TRUE)
   
-  
-moves <<- tibble(
-  id =move_api[["id"]],
-  name=move_api[["name"]],
-  accuracy =move_api[["accuracy"]],
-  power =move_api[["power"]],
-  PowerPoint =move_api[["pp"]],
-  move_ailments_api[["moves"]][[1]],
-  move_battleStyle_api[["name"]],
-  move_target_api[["name"]],
-)
+  type <-tibble(typeID = type_api[["id"]],
+                move =type_api[["moves"]][[1]][[1]])
+  return(type)
+}
+```
 
-damage <<- tibble(
-   move_damageClass_api[["name"]],
-   move_damageClass_api[["moves"]][["name"]], 
-)
-  
-category <<- tibble(
-  move_categories_api[["name"]],
-  move_categories_api[["moves"]][["name"]]
-)
+——MOVES
 
-
-learn <<- tibble(
-   move_learnMethod_api[["name"]],
-   move_learnMethod_api[["version_groups"]][["name"]],
-)
-
-  return(list(moves, damage, category, learn))
-
+``` r
+# Create a function for pokemon moves
+lookup_moves<-function(infoMove, pokemon){
+  base<-"https://pokeapi.co/api/v2/"
+  url<-(paste0(base,infoMove,"/",pokemon,"/"))
+  pokemon_api<-GET(url) %>% content("text") %>% fromJSON(flatten=TRUE)
+  return(pokemon_api)
 }
 ```
 
 ``` r
-get_moves("move",     move_info = 826, 
-                      ailment=1,
-                      battlestyle=1,
-                      category=1,
-                      damage=1,
-                      target=1,
-                      learn=1)
-#> [[1]]
-#> # A tibble: 23 x 8
-#>       id name        accuracy power PowerPoint `move_ailments_api[["moves"]][[1]]` move_battleStyle~1 move_~2
-#>    <int> <chr>          <int> <int>      <int> <chr>                               <chr>              <chr>  
-#>  1   826 eerie-spell      100    80          5 thunder-punch                       attack             specif~
-#>  2   826 eerie-spell      100    80          5 body-slam                           attack             specif~
-#>  3   826 eerie-spell      100    80          5 stun-spore                          attack             specif~
-#>  4   826 eerie-spell      100    80          5 thunder-shock                       attack             specif~
-#>  5   826 eerie-spell      100    80          5 thunderbolt                         attack             specif~
-#>  6   826 eerie-spell      100    80          5 thunder-wave                        attack             specif~
-#>  7   826 eerie-spell      100    80          5 thunder                             attack             specif~
-#>  8   826 eerie-spell      100    80          5 lick                                attack             specif~
-#>  9   826 eerie-spell      100    80          5 glare                               attack             specif~
-#> 10   826 eerie-spell      100    80          5 zap-cannon                          attack             specif~
-#> # ... with 13 more rows, and abbreviated variable names 1: `move_battleStyle_api[["name"]]`,
-#> #   2: `move_target_api[["name"]]`
-#> 
-#> [[2]]
-#> [1] 1
-#> 
-#> [[3]]
-#> [1] 1
-#> 
-#> [[4]]
-#> [1] 1
+get_moves <- function(type=10){
+
+  move_api<-lookup_moves("move", type)
+  #move_ailments_api<-lookup_moves("move-ailment", type) 
+  #move_battleStyle_api<-lookup_moves("move-battle-style", type) 
+  #move_categories_api<-lookup_moves("move-category", type) 
+  #move_damageClass_api<-lookup_moves("move-damage-class",type) 
+  #move_learnMethod_api<-lookup_moves("move-learn-method", type) 
+  #move_target_api<-lookup_moves("move-target", type) 
+  
+  
+moves <- tibble(
+  idMove =move_api[["id"]],
+  nameMove=move_api[["name"]],
+  accuracy = move_api[["accuracy"]],
+  power = move_api[["power"]],
+  PowerPoint = move_api[["pp"]],
+  #Ailments = move_ailments_api[["moves"]][[1]],
+  #battle = move_battleStyle_api[["name"]],
+  #target = move_target_api[["name"]]
+)
+
+
+  return(moves)
+
+}
 ```
 
-``` r
-#reading encounter data
-encounter_api = GET("https://pokeapi.co/api/v2/pokemon/ditto/encounters") 
-encounter_text<-content(encounter_api,"text")
-encounter_json<-fromJSON(encounter_text,flatten=TRUE)
-```
-
-``` r
-#where you can encounter this pokeman
-encounter_json$location_area.name
-#>  [1] "sinnoh-route-218-area"          "johto-route-34-area"            "johto-route-35-area"           
-#>  [4] "johto-route-47-area"            "kanto-route-13-area"            "kanto-route-14-area"           
-#>  [7] "kanto-route-15-area"            "cerulean-cave-1f"               "cerulean-cave-2f"              
-#> [10] "cerulean-cave-b1f"              "kanto-route-23-area"            "pokemon-mansion-b1f"           
-#> [13] "desert-underpass-area"          "giant-chasm-forest"             "giant-chasm-forest-cave"       
-#> [16] "pokemon-village-area"           "johto-safari-zone-zone-wetland"
-```
-
-using above to create function: get_encounter \<- function()
-
-``` r
-#reading forms data
-forms_api = GET("https://pokeapi.co/api/v2/pokemon-form/ditto/") 
-api_forms<-content(forms_api,"text")
-api_json2<-fromJSON(api_forms,flatten=TRUE)
-```
-
-``` r
-#reading types data
-types_api<-GET(api_json2[["types"]][["type.url"]][[1]])
-types_text<-content(types_api,"text")
-df_types<-fromJSON(types_text,flatten=TRUE)
-```
+——BERRY
 
 This next section will pull information about the pokemon berry from the
 api. Berries are small fruits that can provide restoration, stat
@@ -241,6 +177,8 @@ Poffins.
 
 flavors: A list of references to each flavor a berry can have and the
 potency of each of those flavors in regard to this berry.
+
+——ENCOUNTERS—– ORGINAL
 
 Gets data for the encounter condition value and puts it into a df
 
@@ -355,16 +293,30 @@ summary(berries_df$soil_dryness)
 #>     4.0     6.0     8.0    10.2    10.0    35.0
 ```
 
-Correlation
+Correlation The is a strongly negative correlation between berry growth
+time and soil dryness. As the berry grows, the soil becomes drier.
 
 ``` r
 cor(berries_df$growth_time,berries_df$soil_dryness)
 #> [1] -0.6768502
 ```
 
+There is a positive correlation between natural gift power and the size
+of berry. As the berry grows, the natural gift power increases. This
+gift deals damage with no additional effects. However, the damage
+depends on the type of berry consumed.
+
 ``` r
-cor(berries_df$growth_time, berries_df$size)
-#> [1] 0.1178562
+cor(berries_df$natural_gift_power, berries_df$size)
+#> [1] 0.2717077
+```
+
+There does appear to be a positive relationship between the type of
+berry and damage received from the berry
+
+``` r
+cor(berries_df$id, berries_df$natural_gift_power)
+#> [1] 0.5214908
 ```
 
 ``` r
@@ -422,7 +374,7 @@ g<-ggplot(berries_df,aes(x = firmness.name))
         scale_fill_discrete(name = "Size Category") 
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-84-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-139-1.png)<!-- -->
 
 ``` r
     g<-ggplot(berries_df,
@@ -431,7 +383,7 @@ g<-ggplot(berries_df,aes(x = firmness.name))
         labs(x = "Soil",title = "Dryness of the Soil") 
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-85-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-140-1.png)<!-- -->
 
 ``` r
     g<-ggplot(berries_df,
@@ -440,7 +392,7 @@ g<-ggplot(berries_df,aes(x = firmness.name))
         labs(x = "Growth Time",title = "Berry Growth Time") 
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-86-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-141-1.png)<!-- -->
 
 ``` r
     g<-ggplot(berries_df,
@@ -450,4 +402,4 @@ g<-ggplot(berries_df,aes(x = firmness.name))
           labs(x = "Growth Time",title = "Berry Growth Time") 
 ```
 
-<img src="README_files/figure-gfm/unnamed-chunk-87-1.png" width="60%" style="display: block; margin: auto;" />
+<img src="README_files/figure-gfm/unnamed-chunk-142-1.png" width="60%" style="display: block; margin: auto;" />
