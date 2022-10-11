@@ -125,53 +125,110 @@ for(i in 2:64){
 }
 ```
 
+## Get Pokemon
+
+To request information from the api, the user has 3 options:
+
+1.  Get Basic information and Training
+2.  Get Basic information and Stats
+3.  Get All - Basic information, Training, and Stats
+4.  Get Berry information.
+
+The default arguments are (pokemon = 132, tran = 1, stat = 1, move = 1,
+berry=0), where 1 is return this information and 0 do not return this
+information. \#change EVAL later
+
+``` r
+get_pokemon("DITTO")
+```
+
+## 7. Function to get your pokemon
+
+``` r
+get_pokemon <- function(pokemon = 132, tran =1, stat = 1, move = 1, berry=0){
+    poke_One<-NULL
+    
+  if (is.numeric(pokemon) == "TRUE"){
+    pokemon_mini<-lookname(lookid(pokemon))
+  } else {
+    pokemon_mini<-lookname(pokemon)
+  }
+
+  poke_One<-NULL  
+  if(move == 0 & tran == 1 & stat == 0){
+    basic <-basic(pokemon_mini)          #provides training and base
+    traning<-traning(pokemon_mini)
+    poke_One<-merge(basic,traning)
+  }else if(move == 0 & tran == 0 & stat == 1){
+    basic <-basic(pokemon_mini)         
+    stat<-stats(pokemon_mini)            ##provides stats and base
+    poke_One<-merge(basic,stat)
+  }else if(move == 1 & tran == 1 & stat == 1){
+    poke_One[1]<-lapply(pokemon, FUN=info)   #provides all info including moves
+  }else{
+    poke_One[1]<-lapply(pokemon, FUN=info)   #if a combination is missed, return everything
+  }
+   
+  if(berry == 1){
+    berry <- get_berry()
+  }
+
+return(list(poke_One, berry))
+}
+```
+
 summarize
 
 ``` r
 table(berries_df$flavors.flavor.name, berries_df$growth_time)
-#>         
-#>           2  3  4  5  6  8 12 15 18 24
-#>   bitter  5  5  3  5  4  7  1  5 17 12
-#>   dry     5  5  3  5  4  7  1  5 17 12
-#>   sour    5  5  3  5  4  7  1  5 17 12
-#>   spicy   5  5  3  5  4  7  1  5 17 12
-#>   sweet   5  5  3  5  4  7  1  5 17 12
 ```
+
+    ##         
+    ##           2  3  4  5  6  8 12 15 18 24
+    ##   bitter  5  5  3  5  4  7  1  5 17 12
+    ##   dry     5  5  3  5  4  7  1  5 17 12
+    ##   sour    5  5  3  5  4  7  1  5 17 12
+    ##   spicy   5  5  3  5  4  7  1  5 17 12
+    ##   sweet   5  5  3  5  4  7  1  5 17 12
 
 ``` r
 table(berries_df$flavors.flavor.name, berries_df$flavors.potency)
-#>         
-#>           0 10 15 20 25 30 40
-#>   bitter 36 19  3  2  0  3  1
-#>   dry    34 20  3  2  1  3  1
-#>   sour   36 17  3  2  0  5  1
-#>   spicy  35 17  3  2  1  5  1
-#>   sweet  35 18  3  2  0  5  1
 ```
+
+    ##         
+    ##           0 10 15 20 25 30 40
+    ##   bitter 36 19  3  2  0  3  1
+    ##   dry    34 20  3  2  1  3  1
+    ##   sour   36 17  3  2  0  5  1
+    ##   spicy  35 17  3  2  1  5  1
+    ##   sweet  35 18  3  2  0  5  1
 
 Numerical Summary - Growth Time
 
 ``` r
 summary(berries_df$growth_time)
-#>    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-#>    2.00    5.00   15.00   12.86   18.00   24.00
 ```
+
+    ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+    ##    2.00    5.00   15.00   12.86   18.00   24.00
 
 Numerical Summary - Soil Dryness
 
 ``` r
 summary(berries_df$soil_dryness)
-#>    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-#>     4.0     6.0     8.0    10.2    10.0    35.0
 ```
+
+    ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+    ##     4.0     6.0     8.0    10.2    10.0    35.0
 
 Correlation The is a strongly negative correlation between berry growth
 time and soil dryness. As the berry grows, the soil becomes drier.
 
 ``` r
 cor(berries_df$growth_time,berries_df$soil_dryness)
-#> [1] -0.6768502
 ```
+
+    ## [1] -0.6768502
 
 There is a positive correlation between natural gift power and the size
 of berry. As the berry grows, the natural gift power increases. This
@@ -180,16 +237,18 @@ depends on the type of berry consumed.
 
 ``` r
 cor(berries_df$natural_gift_power, berries_df$size)
-#> [1] 0.2717077
 ```
+
+    ## [1] 0.2717077
 
 There does appear to be a positive relationship between the type of
 berry and damage received from the berry
 
 ``` r
 cor(berries_df$id, berries_df$natural_gift_power)
-#> [1] 0.5214908
 ```
+
+    ## [1] 0.5214908
 
 ``` r
 berrySummary <- berries_df %>% select(flavors.potency, growth_time, max_harvest, natural_gift_power, size, smoothness, soil_dryness) %>% apply(2, function(x){summary(x[!is.na(x)])}) 
@@ -250,7 +309,7 @@ drier.
           labs(x = "Growth Time",title = "Berry Growth Time") 
 ```
 
-<img src="README_files/figure-gfm/unnamed-chunk-68-1.png" width="60%" style="display: block; margin: auto;" />
+<img src="README_files/figure-gfm/unnamed-chunk-13-1.png" width="60%" style="display: block; margin: auto;" />
 
 We want to see if having a higher BMI (weight/height) results in a
 slower speed. We can see a couple of pokemons with a higher BMI which
@@ -264,5 +323,3 @@ relationship. ADD ME\*\*
           labs(x = "BMI", y= "Speed",title = "Body Mass Index (BMI) and Speed") +
          theme(legend.title = element_text(size = 5), legend.text = element_text(size = 5))
 ```
-
-<img src="README_files/figure-gfm/unnamed-chunk-69-1.png" width="60%" style="display: block; margin: auto;" />

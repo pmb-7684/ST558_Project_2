@@ -127,6 +127,54 @@ for(i in 2:64){
 
 
 
+## Get Pokemon
+To request information from the api, the user has 3 options:
+
+  1. Get Basic information and Training
+  2. Get Basic information and Stats
+  3. Get All - Basic information, Training, and Stats
+  4. Get Berry information.
+  
+The default arguments are (pokemon = 132, tran = 1, stat = 1, move = 1, berry=0), where 1 is return this information and 0 do not return this information.   #change EVAL later
+```{r onePokemon, eval=FALSE}
+get_pokemon("DITTO")
+```
+
+
+## 7. Function to get your pokemon
+```{r getpokemon, eval=FALSE}
+get_pokemon <- function(pokemon = 132, tran =1, stat = 1, move = 1, berry=0){
+    poke_One<-NULL
+    
+  if (is.numeric(pokemon) == "TRUE"){
+    pokemon_mini<-lookname(lookid(pokemon))
+  } else {
+    pokemon_mini<-lookname(pokemon)
+  }
+
+  poke_One<-NULL  
+  if(move == 0 & tran == 1 & stat == 0){
+    basic <-basic(pokemon_mini)          #provides training and base
+    traning<-traning(pokemon_mini)
+    poke_One<-merge(basic,traning)
+  }else if(move == 0 & tran == 0 & stat == 1){
+    basic <-basic(pokemon_mini)         
+    stat<-stats(pokemon_mini)            ##provides stats and base
+    poke_One<-merge(basic,stat)
+  }else if(move == 1 & tran == 1 & stat == 1){
+    poke_One[1]<-lapply(pokemon, FUN=info)   #provides all info including moves
+  }else{
+    poke_One[1]<-lapply(pokemon, FUN=info)   #if a combination is missed, return everything
+  }
+   
+  if(berry == 1){
+    berry <- get_berry()
+  }
+
+return(list(poke_One, berry))
+}
+```
+
 
 summarize 
 ```{r}
@@ -216,8 +264,8 @@ The scatter plot visually verifies the negative relationship between the growth 
 We want to see if having a higher BMI (weight/height) results in a slower speed.
 We can see a couple of pokemons with a higher BMI which have a slower speed.
 In general, there does not appear to be relationship.     ADD ME**
-```{r, out.width = "60%", fig.align = "center"}
-	g<-ggplot(poke,
+```{r, out.width = "60%", fig.align = "center", eval=FALSE} 
+	g<-ggplot(poke,                                        #make sure to change EVAL
 	          aes(x = round((weight/height),2), y = speed))
 	  g + geom_point(aes(color = type)) +
 	      labs(x = "BMI", y= "Speed",title = "Body Mass Index (BMI) and Speed") +
