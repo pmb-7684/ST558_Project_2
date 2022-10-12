@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style type="text/css">
+@font-face {
+font-family: octicons-link;
+src: url(data:font/woff;charset=utf-8;base64,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) format('woff');
+}
+body {
+-webkit-text-size-adjust: 100%;
+text-size-adjust: 100%;
+color: #333;
+font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+font-size: 16px;
+line-height: 1.6;
+word-wrap: break-word;
+}
+a {
+background-color: transparent;
+}
+a:active,
+a:hover {
+outline: 0;
+}
+strong {
+font-weight: bold;
+}
+h1 {
+font-size: 2em;
+margin: 0.67em 0;
+}
+img {
+border: 0;
+}
+hr {
+box-sizing: content-box;
+height: 0;
+}
+pre {
+overflow: auto;
+}
+code,
+kbd,
+pre {
+font-family: monospace, monospace;
+font-size: 1em;
+}
+input {
+color: inherit;
+font: inherit;
+margin: 0;
+}
+html input[disabled] {
+cursor: default;
+}
+input {
+line-height: normal;
+}
+input[type="checkbox"] {
+box-sizing: border-box;
+padding: 0;
+}
+table {
+border-collapse: collapse;
+border-spacing: 0;
+}
+td,
+th {
+padding: 0;
+}
+* {
+box-sizing: border-box;
+}
+input {
+font: 13px / 1.4 Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+a {
+color: #4078c0;
+text-decoration: none;
+}
+a:hover,
+a:active {
+text-decoration: underline;
+}
+hr {
+height: 0;
+margin: 15px 0;
+overflow: hidden;
+background: transparent;
+border: 0;
+border-bottom: 1px solid #ddd;
+}
+hr:before {
+display: table;
+content: "";
+}
+hr:after {
+display: table;
+clear: both;
+content: "";
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 15px;
+margin-bottom: 15px;
+line-height: 1.1;
+}
+h1 {
+font-size: 30px;
+}
+h2 {
+font-size: 21px;
+}
+h3 {
+font-size: 16px;
+}
+h4 {
+font-size: 14px;
+}
+h5 {
+font-size: 12px;
+}
+h6 {
+font-size: 11px;
+}
+blockquote {
+margin: 0;
+}
+ul,
+ol {
+padding: 0;
+margin-top: 0;
+margin-bottom: 0;
+}
+ol ol,
+ul ol {
+list-style-type: lower-roman;
+}
+ul ul ol,
+ul ol ol,
+ol ul ol,
+ol ol ol {
+list-style-type: lower-alpha;
+}
+dd {
+margin-left: 0;
+}
+code {
+font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+font-size: 12px;
+}
+pre {
+margin-top: 0;
+margin-bottom: 0;
+font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}
+.select::-ms-expand {
+opacity: 0;
+}
+.octicon {
+font: normal normal normal 16px/1 octicons-link;
+display: inline-block;
+text-decoration: none;
+text-rendering: auto;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+}
+.octicon-link:before {
+content: '\f05c';
+}
+.markdown-body:before {
+display: table;
+content: "";
+}
+.markdown-body:after {
+display: table;
+clear: both;
+content: "";
+}
+.markdown-body>*:first-child {
+margin-top: 0 !important;
+}
+.markdown-body>*:last-child {
+margin-bottom: 0 !important;
+}
+a:not([href]) {
+color: inherit;
+text-decoration: none;
+}
+.anchor {
+display: inline-block;
+padding-right: 2px;
+margin-left: -18px;
+}
+.anchor:focus {
+outline: none;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 1em;
+margin-bottom: 16px;
+font-weight: bold;
+line-height: 1.4;
+}
+h1 .octicon-link,
+h2 .octicon-link,
+h3 .octicon-link,
+h4 .octicon-link,
+h5 .octicon-link,
+h6 .octicon-link {
+color: #000;
+vertical-align: middle;
+visibility: hidden;
+}
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+text-decoration: none;
+}
+h1:hover .anchor .octicon-link,
+h2:hover .anchor .octicon-link,
+h3:hover .anchor .octicon-link,
+h4:hover .anchor .octicon-link,
+h5:hover .anchor .octicon-link,
+h6:hover .anchor .octicon-link {
+visibility: visible;
+}
+h1 {
+padding-bottom: 0.3em;
+font-size: 2.25em;
+line-height: 1.2;
+border-bottom: 1px solid #eee;
+}
+h1 .anchor {
+line-height: 1;
+}
+h2 {
+padding-bottom: 0.3em;
+font-size: 1.75em;
+line-height: 1.225;
+border-bottom: 1px solid #eee;
+}
+h2 .anchor {
+line-height: 1;
+}
+h3 {
+font-size: 1.5em;
+line-height: 1.43;
+}
+h3 .anchor {
+line-height: 1.2;
+}
+h4 {
+font-size: 1.25em;
+}
+h4 .anchor {
+line-height: 1.2;
+}
+h5 {
+font-size: 1em;
+}
+h5 .anchor {
+line-height: 1.1;
+}
+h6 {
+font-size: 1em;
+color: #777;
+}
+h6 .anchor {
+line-height: 1.1;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table,
+pre {
+margin-top: 0;
+margin-bottom: 16px;
+}
+hr {
+height: 4px;
+padding: 0;
+margin: 16px 0;
+background-color: #e7e7e7;
+border: 0 none;
+}
+ul,
+ol {
+padding-left: 2em;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+margin-top: 0;
+margin-bottom: 0;
+}
+li>p {
+margin-top: 16px;
+}
+dl {
+padding: 0;
+}
+dl dt {
+padding: 0;
+margin-top: 16px;
+font-size: 1em;
+font-style: italic;
+font-weight: bold;
+}
+dl dd {
+padding: 0 16px;
+margin-bottom: 16px;
+}
+blockquote {
+padding: 0 15px;
+color: #777;
+border-left: 4px solid #ddd;
+}
+blockquote>:first-child {
+margin-top: 0;
+}
+blockquote>:last-child {
+margin-bottom: 0;
+}
+table {
+display: block;
+width: 100%;
+overflow: auto;
+word-break: normal;
+word-break: keep-all;
+}
+table th {
+font-weight: bold;
+}
+table th,
+table td {
+padding: 6px 13px;
+border: 1px solid #ddd;
+}
+table tr {
+background-color: #fff;
+border-top: 1px solid #ccc;
+}
+table tr:nth-child(2n) {
+background-color: #f8f8f8;
+}
+img {
+max-width: 100%;
+box-sizing: content-box;
+background-color: #fff;
+}
+code {
+padding: 0;
+padding-top: 0.2em;
+padding-bottom: 0.2em;
+margin: 0;
+font-size: 85%;
+background-color: rgba(0,0,0,0.04);
+border-radius: 3px;
+}
+code:before,
+code:after {
+letter-spacing: -0.2em;
+content: "\00a0";
+}
+pre>code {
+padding: 0;
+margin: 0;
+font-size: 100%;
+word-break: normal;
+white-space: pre;
+background: transparent;
+border: 0;
+}
+.highlight {
+margin-bottom: 16px;
+}
+.highlight pre,
+pre {
+padding: 16px;
+overflow: auto;
+font-size: 85%;
+line-height: 1.45;
+background-color: #f7f7f7;
+border-radius: 3px;
+}
+.highlight pre {
+margin-bottom: 0;
+word-break: normal;
+}
+pre {
+word-wrap: normal;
+}
+pre code {
+display: inline;
+max-width: initial;
+padding: 0;
+margin: 0;
+overflow: initial;
+line-height: inherit;
+word-wrap: normal;
+background-color: transparent;
+border: 0;
+}
+pre code:before,
+pre code:after {
+content: normal;
+}
+kbd {
+display: inline-block;
+padding: 3px 5px;
+font-size: 11px;
+line-height: 10px;
+color: #555;
+vertical-align: middle;
+background-color: #fcfcfc;
+border: solid 1px #ccc;
+border-bottom-color: #bbb;
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 #bbb;
+}
+.pl-c {
+color: #969896;
+}
+.pl-c1,
+.pl-s .pl-v {
+color: #0086b3;
+}
+.pl-e,
+.pl-en {
+color: #795da3;
+}
+.pl-s .pl-s1,
+.pl-smi {
+color: #333;
+}
+.pl-ent {
+color: #63a35c;
+}
+.pl-k {
+color: #a71d5d;
+}
+.pl-pds,
+.pl-s,
+.pl-s .pl-pse .pl-s1,
+.pl-sr,
+.pl-sr .pl-cce,
+.pl-sr .pl-sra,
+.pl-sr .pl-sre {
+color: #183691;
+}
+.pl-v {
+color: #ed6a43;
+}
+.pl-id {
+color: #b52a1d;
+}
+.pl-ii {
+background-color: #b52a1d;
+color: #f8f8f8;
+}
+.pl-sr .pl-cce {
+color: #63a35c;
+font-weight: bold;
+}
+.pl-ml {
+color: #693a17;
+}
+.pl-mh,
+.pl-mh .pl-en,
+.pl-ms {
+color: #1d3e81;
+font-weight: bold;
+}
+.pl-mq {
+color: #008080;
+}
+.pl-mi {
+color: #333;
+font-style: italic;
+}
+.pl-mb {
+color: #333;
+font-weight: bold;
+}
+.pl-md {
+background-color: #ffecec;
+color: #bd2c00;
+}
+.pl-mi1 {
+background-color: #eaffea;
+color: #55a532;
+}
+.pl-mdr {
+color: #795da3;
+font-weight: bold;
+}
+.pl-mo {
+color: #1d3e81;
+}
+kbd {
+display: inline-block;
+padding: 3px 5px;
+font: 11px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+line-height: 10px;
+color: #555;
+vertical-align: middle;
+background-color: #fcfcfc;
+border: solid 1px #ccc;
+border-bottom-color: #bbb;
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 #bbb;
+}
+.task-list-item {
+list-style-type: none;
+}
+.task-list-item+.task-list-item {
+margin-top: 3px;
+}
+.task-list-item input {
+margin: 0 0.35em 0.25em -1.6em;
+vertical-align: middle;
+}
+:checked+.radio-label {
+z-index: 1;
+position: relative;
+border-color: #4078c0;
+}
+.sourceLine {
+display: inline-block;
+}
+code .kw { color: #000000; }
+code .dt { color: #ed6a43; }
+code .dv { color: #009999; }
+code .bn { color: #009999; }
+code .fl { color: #009999; }
+code .ch { color: #009999; }
+code .st { color: #183691; }
+code .co { color: #969896; }
+code .ot { color: #0086b3; }
+code .al { color: #a61717; }
+code .fu { color: #63a35c; }
+code .er { color: #a61717; background-color: #e3d2d2; }
+code .wa { color: #000000; }
+code .cn { color: #008080; }
+code .sc { color: #008080; }
+code .vs { color: #183691; }
+code .ss { color: #183691; }
+code .im { color: #000000; }
+code .va {color: #008080; }
+code .cf { color: #000000; }
+code .op { color: #000000; }
+code .bu { color: #000000; }
+code .ex { color: #000000; }
+code .pp { color: #999999; }
+code .at { color: #008080; }
+code .do { color: #969896; }
+code .an { color: #008080; }
+code .cv { color: #008080; }
+code .in { color: #008080; }
+</style>
+<style>
+body {
+  box-sizing: border-box;
+  min-width: 200px;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 45px;
+  padding-top: 0px;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<h1 id="st-558---project-2">ST 558 - Project 2</h1>
+<p>Yi Ren and Paula Bailey 2022-09-22</p>
+<ul>
+<li>This document will walk the user through the process of connecting
+to &amp; collecting data from the <a href="https://pokeapi.co/">pokemon
+API</a> within R.</li>
+</ul>
+<h2 id="reference-to-render-code">Reference to Render Code</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>rmarkdown<span class="sc">::</span><span class="fu">render</span>(<span class="st">&quot;Project2.Rmd&quot;</span>, <span class="st">&quot;github_document&quot;</span>,<span class="st">&quot;README.md&quot;</span>)</span></code></pre></div>
+<h2 id="packages-for-vignette">Packages for Vignette</h2>
+<ul>
+<li>The following packages are required for connecting and retrieving
+data from the API.</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li><code>httr</code> - Retrieves Data from an API</li>
+<li><code>jsonlite</code> - Parses Results from an API Query</li>
+<li><code>dplyr</code> - A part of the <code>tidyverse</code> used for
+manipulating data</li>
+<li><code>tidyr</code> - A part of the <code>tidyverse</code> used for
+data cleaning</li>
+<li><code>ggplot2</code> - A part of the <code>tidyverse</code> used for
+creating graphics</li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in Required Packages </span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(httr)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
+<h2 id="id_6-function-for-moves-information">6. Function for moves
+information</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>get_moves <span class="ot">&lt;-</span> <span class="cf">function</span>(type){</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  base<span class="ot">&lt;-</span><span class="st">&quot;https://pokeapi.co/api/v2/move/&quot;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  url<span class="ot">&lt;-</span>(<span class="fu">paste0</span>(base,type,<span class="st">&quot;/&quot;</span>))</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  move_api<span class="ot">&lt;-</span><span class="fu">GET</span>(url) <span class="sc">%&gt;%</span> <span class="fu">content</span>(<span class="st">&quot;text&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">fromJSON</span>(<span class="at">flatten=</span><span class="cn">TRUE</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  moves <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">idMove =</span>move_api[[<span class="st">&quot;id&quot;</span>]],</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">nameMove=</span>move_api[[<span class="st">&quot;name&quot;</span>]],</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">accuracy =</span> move_api[[<span class="st">&quot;accuracy&quot;</span>]],</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">power =</span> move_api[[<span class="st">&quot;power&quot;</span>]],</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">PowerPoint =</span> move_api[[<span class="st">&quot;pp&quot;</span>]])</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(moves)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h2 id="id_7-function-to-get-your-pokemon">7. Function to get your
+pokemon</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>get_pokemon <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">pokemon =</span> <span class="dv">132</span>, <span class="at">tran =</span><span class="dv">1</span>, <span class="at">stat =</span> <span class="dv">1</span>, <span class="at">move =</span> <span class="dv">1</span>, <span class="at">berry=</span><span class="dv">0</span>){</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    poke_One<span class="ot">&lt;-</span><span class="cn">NULL</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.numeric</span>(pokemon) <span class="sc">==</span> <span class="st">&quot;TRUE&quot;</span>){</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    pokemon_mini<span class="ot">&lt;-</span><span class="fu">lookname</span>(<span class="fu">lookid</span>(pokemon))</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    pokemon_mini<span class="ot">&lt;-</span><span class="fu">lookname</span>(pokemon)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  poke_One<span class="ot">&lt;-</span><span class="cn">NULL</span>  </span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(move <span class="sc">==</span> <span class="dv">0</span> <span class="sc">&amp;</span> tran <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> stat <span class="sc">==</span> <span class="dv">0</span>){</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    basic <span class="ot">&lt;-</span><span class="fu">basic</span>(pokemon_mini)                  </span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    traning<span class="ot">&lt;-</span><span class="fu">traning</span>(pokemon_mini)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    poke_One<span class="ot">&lt;-</span><span class="fu">merge</span>(basic,traning)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span> <span class="cf">if</span>(move <span class="sc">==</span> <span class="dv">0</span> <span class="sc">&amp;</span> tran <span class="sc">==</span> <span class="dv">0</span> <span class="sc">&amp;</span> stat <span class="sc">==</span> <span class="dv">1</span>){</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    basic <span class="ot">&lt;-</span><span class="fu">basic</span>(pokemon_mini)         </span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    stat<span class="ot">&lt;-</span><span class="fu">stats</span>(pokemon_mini)                   </span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    poke_One<span class="ot">&lt;-</span><span class="fu">merge</span>(basic,stat)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span> <span class="cf">if</span>(move <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> tran <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> stat <span class="sc">==</span> <span class="dv">1</span>){</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    poke_One[<span class="dv">1</span>]<span class="ot">&lt;-</span><span class="fu">lapply</span>(pokemon, <span class="at">FUN=</span>info)      </span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span>{</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    poke_One[<span class="dv">1</span>]<span class="ot">&lt;-</span><span class="fu">lapply</span>(pokemon, <span class="at">FUN=</span>info)   </span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(berry <span class="sc">==</span> <span class="dv">1</span>){</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    berry <span class="ot">&lt;-</span> <span class="fu">get_berry</span>()</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="fu">return</span>(<span class="fu">list</span>(poke_One, berry))</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h2 id="function-for-berries">Function for berries</h2>
+<ul>
+<li>This function does not require any input arguments. The function
+loops through the pokemon api and pulls the information for the 64
+berries. There is not a direct link to pokemon data itself. It will be
+used for future analytical purposes.</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>get_berry <span class="ot">&lt;-</span><span class="cf">function</span>(){</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  api_json<span class="ot">&lt;-</span><span class="fu">GET</span>(<span class="st">&quot;https://pokeapi.co/api/v2/berry/1/&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">content</span>(<span class="st">&quot;text&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">fromJSON</span>(<span class="at">flatten=</span><span class="cn">TRUE</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  berries_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(api_json)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">64</span>){</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    base <span class="ot">&lt;-</span> <span class="st">&quot;https://pokeapi.co/api/v2/berry/&quot;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    call_next <span class="ot">&lt;-</span> (<span class="fu">paste0</span>(base,i,<span class="st">&quot;/&quot;</span>))</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    api_json2 <span class="ot">&lt;-</span> <span class="fu">GET</span>(call_next) <span class="sc">%&gt;%</span> <span class="fu">content</span>(<span class="st">&quot;text&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">fromJSON</span>(<span class="at">flatten=</span><span class="cn">TRUE</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    next_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(api_json2)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    berries_df <span class="ot">&lt;-</span> <span class="fu">rbind</span>(berries_df,next_df)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    berries_df <span class="ot">&lt;&lt;-</span>berries_df <span class="sc">%&gt;%</span> </span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>                <span class="fu">select</span>(<span class="sc">-</span> firmness.url,<span class="sc">-</span>flavors.flavor.url,<span class="sc">-</span>item.url, <span class="sc">-</span>natural_gift_type.url )</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h2 id="get-pokemon">Get Pokemon</h2>
+<p>To request information from the api, the user has 3 options:</p>
+<ol style="list-style-type: decimal">
+<li>Get Basic information and Training</li>
+<li>Get Basic information and Stats</li>
+<li>Get All - Basic information, Training, and Stats</li>
+<li>Get Berry information.</li>
+</ol>
+<p>The default arguments are (pokemon = 132, tran = 1, stat = 1, move =
+1, berry=0), where 1 is return this information and 0 do not return this
+information. #change EVAL later</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_pokemon</span>(<span class="st">&quot;DITTO&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_pokemon</span>(<span class="dv">18</span>, <span class="at">tran =</span> <span class="dv">1</span>, <span class="at">stat =</span> <span class="dv">0</span>, <span class="at">move =</span> <span class="dv">0</span>, <span class="at">berry=</span><span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_pokemon</span>(<span class="dv">132</span>, <span class="at">tran =</span> <span class="dv">0</span>, <span class="at">stat =</span> <span class="dv">1</span>, <span class="at">move =</span> <span class="dv">0</span>, <span class="at">berry =</span> <span class="dv">0</span>)</span></code></pre></div>
+<h2 id="berries-subset">Berries subset</h2>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_berry</span>()</span></code></pre></div>
+<h2 id="scatter-plot">Scatter plot</h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(berries_df,<span class="fu">aes</span>(<span class="at">x =</span> growth_time, <span class="at">y =</span> soil_dryness)) <span class="sc">+</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">formula =</span> y<span class="sc">~</span>x, <span class="at">method =</span> <span class="st">&quot;loess&quot;</span>) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Growth Time&quot;</span>, <span class="at">y=</span> <span class="st">&quot;Soil Dryness&quot;</span>,<span class="at">title =</span> <span class="st">&quot;Impact of Soil Dryness on Growth&quot;</span>) <span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">6</span>), <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">6</span>), <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code></pre></div>
+<img src="data:image/png;base64,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" style="display: block; margin: auto;" />
+
+<ul>
+<li><p>This scatter plot shows the relationship between berry growth and
+soil dryness. It visually verifies the negative relationship between the
+growth of berries and soil dryness. As the berry grows, the soil becomes
+drier.</p>
+<ul>
+<li>This negative relationship is also confirmed in the correlation
+score of -.68.</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(berries_df<span class="sc">$</span>growth_time,berries_df<span class="sc">$</span>soil_dryness)</span></code></pre></div>
+<pre><code>## [1] -0.6768502</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sep, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">round</span>((weight<span class="sc">/</span>height),<span class="dv">2</span>), <span class="at">y =</span> speed)) <span class="sc">+</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> main.type)) <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;BMI&quot;</span>, <span class="at">y=</span> <span class="st">&quot;Speed&quot;</span>,<span class="at">title =</span> <span class="st">&quot;Body Mass Index (BMI) and Speed&quot;</span>) <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">5</span>), <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">5</span>))</span></code></pre></div>
+<ul>
+<li>This scatter plot shows the relationship between BMI (weight/height)
+and speed. We used type of pokemon to highlight the color. This chart
+shows no clear relationship between a higher BMI and moving at slower
+speeds. We can see a few pokemon to the right with BMIs around 50;
+However, they are not the slowest pokemon.</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li>Numeric summaries for berries</li>
+</ol>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>berrySummary <span class="ot">&lt;-</span> berries_df <span class="sc">%&gt;%</span> <span class="fu">select</span>(growth_time, max_harvest, size, smoothness, soil_dryness) <span class="sc">%&gt;%</span> <span class="fu">apply</span>(<span class="dv">2</span>, <span class="cf">function</span>(x){<span class="fu">summary</span>(x[<span class="sc">!</span><span class="fu">is.na</span>(x)])}) </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(berrySummary, <span class="at">caption =</span> <span class="st">&#39;Summary of Berry Stats&#39;</span>, <span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">growth_time</th>
+<th align="right">max_harvest</th>
+<th align="right">size</th>
+<th align="right">smoothness</th>
+<th align="right">soil_dryness</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Min.</td>
+<td align="right">2.00</td>
+<td align="right">5.00</td>
+<td align="right">20.00</td>
+<td align="right">20.00</td>
+<td align="right">4.0</td>
+</tr>
+<tr class="even">
+<td align="left">1st Qu.</td>
+<td align="right">5.00</td>
+<td align="right">5.00</td>
+<td align="right">45.75</td>
+<td align="right">25.00</td>
+<td align="right">6.0</td>
+</tr>
+<tr class="odd">
+<td align="left">Median</td>
+<td align="right">15.00</td>
+<td align="right">5.00</td>
+<td align="right">98.50</td>
+<td align="right">30.00</td>
+<td align="right">8.0</td>
+</tr>
+<tr class="even">
+<td align="left">Mean</td>
+<td align="right">12.86</td>
+<td align="right">6.48</td>
+<td align="right">120.53</td>
+<td align="right">31.56</td>
+<td align="right">10.2</td>
+</tr>
+<tr class="odd">
+<td align="left">3rd Qu.</td>
+<td align="right">18.00</td>
+<td align="right">5.00</td>
+<td align="right">155.25</td>
+<td align="right">35.00</td>
+<td align="right">10.0</td>
+</tr>
+<tr class="even">
+<td align="left">Max.</td>
+<td align="right">24.00</td>
+<td align="right">15.00</td>
+<td align="right">300.00</td>
+<td align="right">60.00</td>
+<td align="right">35.0</td>
+</tr>
+</tbody>
+</table>
+<p>Summary of Berry Stats</p>
+<p>The summary statistics for growth time, maximum harvest, size,
+smoothness, and soil dryness.</p>
+<ul>
+<li><p>Growth Time : The difference between the mean (12.86) and median
+(15.00) is small, so we can infer HP is symmetrically distributed and
+slightly skewed to the left. Median is higher than mean.</p></li>
+<li><p>For Maximum Harvest and Smoothness, the difference between their
+respective mean and median is small, so we can infer the shape is
+symmetrically distributed; however, slightly skewed to the right. The
+mean is higher than median.</p></li>
+<li><p>For Size and Soil Dryness, the difference between each respective
+mean and median is relatively large. Since the mean is greater than the
+median, we can infer the shape is right skewed.</p></li>
+</ul>
+
+</body>
+</html>
